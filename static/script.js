@@ -11,7 +11,7 @@ document.getElementById("predictBtn").addEventListener("click", function() {
         .then(data => {
             const resultContainer = document.getElementById("result");
             resultContainer.style.display = "block";
-            resultContainer.innerHTML = `<h3>Predicted Spending: ${data.prediction}</h3>`;
+            resultContainer.innerHTML = `<h3>Predicted Spending: ${data.balance_after}</h3>`;
         })
         .catch(error => {
             console.error("Error:", error);

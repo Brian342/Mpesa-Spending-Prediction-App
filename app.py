@@ -20,15 +20,15 @@ api = Api(app)
 
 # Prediction API call
 class Prediction(Resource):
-    def get(self, transaction_amount):
+    def get(self, Transaction_amount):
         try:
-            print(f"Received transaction amount: {transaction_amount}")
+            print(f"Received transaction amount: {Transaction_amount}")
 
-            transaction_amount = [int(transaction_amount)]  # Convert to integer
+            Transaction_amount = [int(Transaction_amount)]  # Convert to integer
 
-            features = transaction_amount
+            features = Transaction_amount
 
-            df = pd.DataFrame([features], columns=['transaction_amount'])  # Naming the columns as feature_1, feature_2, ..., feature_12
+            df = pd.DataFrame([features], columns=['Transaction_amount'])
 
             # Load the trained model
             model_path = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Mpesa_XGBRegressor_balance.pkl"
@@ -38,7 +38,7 @@ class Prediction(Resource):
             prediction = model.predict(df)
             balance_after = int(prediction[0])
 
-            return {"prediction": balance_after}, 200  # Returning JSON response
+            return {"Balance_After": balance_after}, 200  # Returning JSON response
 
         except Exception as e:
             print(f"Error: {e}")
@@ -63,7 +63,7 @@ class GetData(Resource):
 
 
 # Adding resources to the API
-api.add_resource(Prediction, '/prediction/<int:transaction_amount>')
+api.add_resource(Prediction, '/prediction/<int:Transaction_amount>')
 api.add_resource(GetData, '/data')
 
 if __name__ == "__main__":
