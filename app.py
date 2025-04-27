@@ -24,7 +24,6 @@ class Prediction(Resource):
         try:
             print(f"Received transaction amount: {transaction_amount}")
 
-            # Create a DataFrame with 12 features (you can adjust this based on your training features)
             transaction_amount = [int(transaction_amount)]  # Convert to integer
 
             # Assuming your model was trained on 12 features, we create dummy columns for missing features
