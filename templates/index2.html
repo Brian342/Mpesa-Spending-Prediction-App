@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M-Pesa Spending Predictor</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="static/style.css"> <!-- Link to your CSS file -->
 </head>
 <body>
+
+<!--   Navbar -->
+    <nav class="navbar">
+        <div class="navbar-brand">Mpesa Statements Insights</div>
+    </nav>
+
+        <!-- Prediction -->
+
     <div class="container">
         <h1>M-Pesa Spending Predictor</h1>
 
@@ -17,10 +25,135 @@
         </div>
 
         <div id="result" class="result-container">
-            <!-- Prediction result will appear here -->
+
         </div>
     </div>
 
-    <script src="script.js"></script> <!-- Link to your JS file -->
+<section class="charts-section">
+
+    <!-- First chart block -->
+
+    <div class="chart-block">
+        <img src="static/images/Transaction_spend_during_weekday.png" alt="Weekday Spending Chart" class="chart-img">
+        <p class="chart-description">
+            This chart shows that most transactions happen on Mondays, Fridays, and Saturdays. Budget better on those days!
+        </p>
+    </div>
+
+    <!-- Second chart block -->
+    <div class="chart-block">
+        <img src="static/images/Monthly_transaction_over_the_months.png" alt="Daily Spending Trend" class="chart-img">
+        <p class="chart-description">
+            Monthly spending shows March having high Transaction Money spending. Kindly note for better
+            money flows through the year
+        </p>
+    </div>
+
+    <!-- Third chart block -->
+    <div class="chart-block">
+        <img src="static/images/Transaction_frequency_and_amount_by_hour_of_day.png" alt="Monthly Spending Trend" class="chart-img">
+        <p class="chart-description">
+            Spending shoots up hour 18. Supper time, I presume note to buy less expensive foods
+        </p>
+    </div>
+
+    <!-- Fourth chart block -->
+    <div class="chart-block">
+        <img src="static/images/Daily_transction_where_spending_spikes.png" alt="Monthly Spending Trend" class="chart-img">
+        <p class="chart-description">
+            Chart 4 shows spending spiking at day 3. Shopping day, maybe. Hint: Shop for less expensive products
+        </p>
+    </div>
+
+
+     <!--chart block 5 -->
+    <div class="chart-block">
+        <img src="static/images/Most_used_transaction_type.png" alt="Monthly Spending Trend" class="chart-img">
+        <p class="chart-description">
+            Chart 5 States that you use Buying goods more compared to other transaction types.
+
+        </p>
+    </div>
+
+     <!--chart block 6 -->
+    <div class="chart-block">
+        <img src="static/images/Average_transaction_amount_by_transaction_type.png" alt="Monthly Spending Trend" class="chart-img">
+        <p class="chart-description">
+            Chart 6 States that your average transaction amount goes to Money Received International having a
+             transaction amount of 15,000.
+        </p>
+    </div>
+
+      <!--chart block 7 -->
+    <div class="chart-block">
+        <img src="static/images/(Paid_in)vs(withdraws).png" alt="Monthly Spending Trend" class="chart-img">
+        <p class="chart-description">
+            Chart 7 shows that more money spending goes to withdraw by a count of (957) and paid in (530)
+            this indicates you are using mpesa to pay stuff more and receiving money to mpesa less
+        </p>
+    </div>
+
+
+      <!--chart block 8 -->
+    <div class="chart-block">
+        <img src="static/images/Top20_most_spend_parties(send_receive)_money.png" alt="Monthly Spending Trend" class="chart-img">
+        <p class="chart-description">
+            Chart 8, Barchart shows your Top 20 most spending parties either sending money or receiving the money.
+            Chime INC has the highest spending with transaction amount of (175,000). Use less transaction amount
+            to prevent bankruptcy
+        </p>
+    </div>
+
+
+      <!--chart block 9 -->
+    <div class="chart-block">
+        <img src="static/images/top20_spending_under_withdraw.png" alt="Monthly Spending Trend" class="chart-img">
+        <p class="chart-description">
+            Chart 9, Barchart shows your Top 20 most spending parties under withdrawal.
+            Airtime purchase has the highest spending with transaction amount of 4,500.
+            Use Wireless network to prevent overspending or less phone talking
+        </p>
+    </div>
+
+        <!--chart block 10 -->
+    <div class="chart-block">
+        <img src="static/images/My_balance_trend_over_time.png" alt="Monthly Spending Trend" class="chart-img">
+        <p class="chart-description">
+            Chart 10, Linechart shows your mpesa balance drop drastically after day 3
+            Utilize your money well to see the months' end at a good rate
+        </p>
+    </div>
+
+
+        <!--chart block 10 -->
+    <div class="chart-block">
+        <img src="static/images/Transaction_impact_on_account_balance.png" alt="Monthly Spending Trend" class="chart-img">
+        <p class="chart-description">
+            This ScatterChart shows the higher risk of low balance after a high transaction has occurred
+            Opt for more affordable product for better balance money
+        </p>
+    </div>
+
+    <hr class="divider">
+
+
+        <!--chart block 10 -->
+    <div class="chart-block">
+        <img src="static/images/Transaction_impact_on_account_balance.png" alt="Monthly Spending Trend" class="chart-img">
+        <p class="chart-description">
+            This ScatterChart shows the higher risk of low balance after a high transaction has occurred
+            Opt for more affordable product for better balance money
+        </p>
+    </div>
+
+</section>
+
+
+    <script src="static/script.js"></script> <!-- Link to your JS file -->
+
+    <footer class="footer">
+        <p>&copy;  Mpesa Statement Insights. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
