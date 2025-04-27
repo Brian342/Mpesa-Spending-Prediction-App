@@ -3,7 +3,8 @@ from flask_restful import Resource, Api
 import pickle
 import pandas as pd
 from flask_cors import CORS
-import xgboost
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+
 
 app = Flask(__name__)
 
@@ -17,6 +18,14 @@ CORS(app)
 
 api = Api(app)
 
+model_path = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/MpesaLinearRegression.pkl"
+scaling_type = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/scaler.pkl"
+encoding_type = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/encoding.pkl"
+
+
+model = pickle.load(open(model_path, "rb"))
+scaler = pickle.load(open(scaling_type, "rb"))
+encode = pickle.load(open(encoding_type, "rb"))
 
 # Prediction API call
 class Prediction(Resource):
@@ -24,21 +33,28 @@ class Prediction(Resource):
         try:
             print(f"Received transaction amount: {Transaction_amount}")
 
-            Transaction_amount = [int(Transaction_amount)]  # Convert to integer
+            Transaction_amount = [int(Transaction_amount)]
 
-            features = Transaction_amount
+            dummy_features = [0] * 11  # Faking 11 features
+            features = Transaction_amount + dummy_features
 
-            df = pd.DataFrame([features], columns=['Transaction_amount'])
+            df = pd.DataFrame([features], columns=[f'feature_{i}' for i in range(1, 13)])  # feature_1 to feature_12
 
             # Load the trained model
-            model_path = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Mpesa_XGBRegressor_balance.pkl"
+            model_path = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/MpesaLinearRegression.pkl"
             model = pickle.load(open(model_path, "rb"))
 
-            # Make the prediction
-            prediction = model.predict(df)
-            balance_after = int(prediction[0])
+            # # Make the prediction
+            # prediction = model.predict(df)
+            # prediction = int(prediction[0])
 
-            return {"Balance_After": balance_after}, 200  # Returning JSON response
+            starting_balance = 5000
+            predicted_spending = model.predict(df)
+            predicted_spending = int(predicted_spending[0])
+
+            remaining_balance = starting_balance - predicted_spending
+
+            return {"remaining_balance": remaining_balance}, 200  # Returning JSON response
 
         except Exception as e:
             print(f"Error: {e}")
