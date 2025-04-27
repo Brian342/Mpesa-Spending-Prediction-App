@@ -5,7 +5,6 @@ import pandas as pd
 from flask_cors import CORS
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
-
 app = Flask(__name__)
 
 
@@ -22,10 +21,10 @@ model_path = "/Users/briankimanzi/Documents/programming Languages/PythonProgramm
 scaling_type = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/scaler.pkl"
 encoding_type = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/encoding.pkl"
 
-
 model = pickle.load(open(model_path, "rb"))
 scaler = pickle.load(open(scaling_type, "rb"))
 encode = pickle.load(open(encoding_type, "rb"))
+
 
 # Prediction API call
 class Prediction(Resource):
@@ -40,18 +39,20 @@ class Prediction(Resource):
 
             df = pd.DataFrame([features], columns=[f'feature_{i}' for i in range(1, 13)])  # feature_1 to feature_12
 
-            # Load the trained model
-            model_path = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/MpesaLinearRegression.pkl"
-            model = pickle.load(open(model_path, "rb"))
+            df_encoding = encode.transform(df[['Transaction_party']])
+            df_encoding = pd.DataFrame(df_encoding, columns=['Transaction_party'])
+
+            df_scaling = scaler.transform(df.drop(['Transaction_party']))
+            df_encoded_scaling = pd.concat([df_encoding, pd.DataFrame(df_scaling)], axis=1)
 
             # # Make the prediction
             # prediction = model.predict(df)
             # prediction = int(prediction[0])
 
-            starting_balance = 5000
-            predicted_spending = model.predict(df)
+            predicted_spending = model.predict(df_encoded_scaling)
             predicted_spending = int(predicted_spending[0])
 
+            starting_balance = 5000
             remaining_balance = starting_balance - predicted_spending
 
             return {"remaining_balance": remaining_balance}, 200  # Returning JSON response
