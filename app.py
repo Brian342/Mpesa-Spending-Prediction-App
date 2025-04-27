@@ -26,23 +26,19 @@ class Prediction(Resource):
 
             transaction_amount = [int(transaction_amount)]  # Convert to integer
 
-            # Assuming your model was trained on 12 features, we create dummy columns for missing features
-            # You may need to replace the dummy values with real values if available
-            dummy_features = [0] * 11  # Assuming the model uses 11 other features
-            features = transaction_amount + dummy_features  # Combine the transaction amount with the dummy features
+            features = transaction_amount
 
-            df = pd.DataFrame([features], columns=[f'feature_{i}' for i in range(1,
-                                                                                 13)])  # Naming the columns as feature_1, feature_2, ..., feature_12
+            df = pd.DataFrame([features], columns=['transaction_amount'])  # Naming the columns as feature_1, feature_2, ..., feature_12
 
             # Load the trained model
-            model_path = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Mpesa_XGBRegressor.pkl"
+            model_path = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Mpesa_XGBRegressor_balance.pkl"
             model = pickle.load(open(model_path, "rb"))
 
             # Make the prediction
             prediction = model.predict(df)
-            prediction = int(prediction[0])  # Convert the prediction to integer
+            balance_after = int(prediction[0])
 
-            return {"prediction": prediction}, 200  # Returning JSON response
+            return {"prediction": balance_after}, 200  # Returning JSON response
 
         except Exception as e:
             print(f"Error: {e}")
