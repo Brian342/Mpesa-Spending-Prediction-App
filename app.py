@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def Home():
-    return render_template("/Users/briankimanzi/Documents/python /mpseawebapp/templates/index.html")
+    return render_template("index.html")
 
 
 CORS(app)
