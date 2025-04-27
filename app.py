@@ -39,10 +39,13 @@ class Prediction(Resource):
 
             df = pd.DataFrame([features], columns=[f'feature_{i}' for i in range(1, 13)])
 
-            df_encoding = encode.transform(df[['Transaction_party']])
-            df_encoding = pd.DataFrame(df_encoding, columns=['Transaction_party'])
+            if 'Transaction_party' in df.columns:
+                df_encoding = encode.transform(df[['Transaction_party']])
+                df_encoding = pd.DataFrame(df_encoding, columns=['Transaction_party'])
+            else:
+                df_encoding = pd.DataFrame({'Transaction_party': ['Unknown']})  # default placeholder
 
-            df_scaling = scaler.transform(df.drop(['Transaction_party']))
+            df_scaling = scaler.transform(df.drop(['Transaction_party'], axis=1, errors='ignore'))
             df_encoded_scaling = pd.concat([df_encoding, pd.DataFrame(df_scaling)], axis=1)
 
             #  Make the prediction
@@ -52,10 +55,10 @@ class Prediction(Resource):
             predicted_spending = model.predict(df_encoded_scaling)
             predicted_spending = int(predicted_spending[0])
 
-            starting_balance = 5000
-            remaining_balance = starting_balance - predicted_spending
+            # starting_balance = 5000
+            # remaining_balance = starting_balance - predicted_spending
 
-            return {"remaining_balance": remaining_balance}, 200  # Returning JSON response
+            return {"remaining_balance": predicted_spending}, 200  # Returning JSON response
 
         except Exception as e:
             print(f"Error: {e}")
