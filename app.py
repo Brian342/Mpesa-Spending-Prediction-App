@@ -17,6 +17,14 @@ CORS(app)
 
 api = Api(app)
 
+model_path = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Mpesa_LinearRegression.pkl"
+scaling_type = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Scaler.pkl"
+encoding_type = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/df_encoding.pkl"
+
+model = pickle.load(open(model_path, "rb"))
+scaler = pickle.load(open(scaling_type, "rb"))
+encode = pickle.load(open(encoding_type, "rb"))
+
 
 # Prediction API call
 class Prediction(Resource):
@@ -31,21 +39,13 @@ class Prediction(Resource):
 
             df = pd.DataFrame([features], columns=[f'feature_{i}' for i in range(1, 13)])
 
-            model_path = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Mpesa_LinearRegression.pkl"
-            scaling_type = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Scaler.pkl"
-            encoding_type = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Encoding.pkl"
-
-            model = pickle.load(open(model_path, "rb"))
-            scaler = pickle.load(open(scaling_type, "rb"))
-            encode = pickle.load(open(encoding_type, "rb"))
-
             df_encoding = encode.transform(df[['Transaction_party']])
             df_encoding = pd.DataFrame(df_encoding, columns=['Transaction_party'])
 
             df_scaling = scaler.transform(df.drop(['Transaction_party']))
             df_encoded_scaling = pd.concat([df_encoding, pd.DataFrame(df_scaling)], axis=1)
 
-            # # Make the prediction
+            #  Make the prediction
             # prediction = model.predict(df)
             # prediction = int(prediction[0])
 
