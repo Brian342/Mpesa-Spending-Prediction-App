@@ -15,20 +15,47 @@
 
         <!-- Prediction -->
 
-    <div class="container">
-        <h1>M-Pesa Spending Predictor</h1>
+<!--    <div class="container">-->
+<!--        <h1>M-Pesa Spending Predictor</h1>-->
 
-        <div class="form-container">
-            <label for="transactionAmount">Enter Transaction Amount:</label>
-            <input type="number" id="transactionAmount" placeholder="Enter amount">
-            <button id="predictBtn">Predict Spending</button>
-        </div>
+<!--        <div class="form-container">-->
+<!--            <label for="transactionAmount">Enter Transaction Amount:</label>-->
+<!--            <input type="number" id="transactionAmount" placeholder="Enter amount">-->
+<!--            <button id="predictBtn">Predict Spending</button>-->
+<!--        </div>-->
 
-        <div id="result" class="result-container">
+<!--        <div id="result" class="result-container">-->
 
-        </div>
+<!--        </div>-->
 
-    </div>
+<!--    </div>-->
+<form id="Prediction">
+    <input type="number" id="transactionAmount" placeholder="Transaction Amount" required>
+    <select id="transactionType">
+        <option value="Buy Goods">Buy Goods </option>
+        <option value="Pay Bill">Pay Bill </option>
+        <option value="SEND MONEY">Send Money </option>
+        <option value="M-SHWARI DEPOSIT FROM M-PESA">M-Shwari Deposit from M-Pesa</option>
+        <option value="RECEIVED FUNDS">Received Funds</option>
+        <option value="POCHI LA BIASHARA"> Pochi la Biashara </option>
+        <option value="M-SHWARI WITHDRAW FROM M-PESA">M-Shwari Withdraw from M-Pesa</option>
+        <option value="AIRTIME PURCHASE">Airtime Purchase </option>
+        <option value="CASH WITHDRAWAL CHARGES"> Cash Withdrawal Charges </option>
+        <option value="BUSINESS PAYMENT">Business Payment</option>
+        <option value="AGENT DEPOSIT">Agent Deposit</option>
+    </select>
+    <select id="transactionParty">
+        <option value=""></option>
+
+
+
+    </select>
+
+
+
+
+
+</form>>
 
 <section class="charts-section">
 
