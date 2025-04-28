@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 from flask_restful import Resource, Api
 import pickle
 import pandas as pd
+import numpy as np
 from flask_cors import CORS
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
@@ -34,31 +35,67 @@ class Prediction(Resource):
 
             Transaction_amount = [int(Transaction_amount)]
 
-            dummy_features = [0] * 11
-            features = Transaction_amount + dummy_features
+# features
 
-            df = pd.DataFrame([features], columns=[f'feature_{i}' for i in range(1, 13)])
+            dummy_features = [
+                np.random.randint(1, 32),  # transaction_Day (1-31)
+                np.random.randint(2000, 2030),  # Year
+                np.random.randint(1, 13),  # Month
+                np.random.randint(1, 32),  # Date
+                np.random.randint(0, 7),  # Weekday (0=Monday, 6=Sunday)
+                np.random.randint(0, 24),  # Hour
+                np.random.randint(0, 60),  # Minute
+                np.random.randint(0, 60),  # Seconds
+                np.random.choice(['SEND MONEY', 'M-SHWARI DEPOSIT FROM M-PESA', 'RECEIVED FUNDS',
+                                  'PAY BILL', 'BUY GOODS', 'POCHI LA BIASHARA',
+                                  'M-SHWARI WITHDRAW FROM M-PESA', 'PAY BILL CHARGES',
+                                  'AIRTIME PURCHASE', 'CASH WITHDRAWAL CHARGES',
+                                  'CASH WITHDRAWAL', 'BUSINESS PAYMENT', 'AGENT DEPOSIT', ]),  # Transaction_type
+                np.random.choice(['Safaricom', 'Equity', 'Cooperative', 'KCB']),  # Transaction_party
+                Transaction_amount,  # Transaction_amount (your real input)
+                np.random.choice(['paid_in', 'withdrawn']),
+                np.random.randint(0, 100000)
+            ]
+            columns = [
+                'transaction_Day', 'Year', 'Month', 'Date', 'Weekday', 'Hour', 'Minute',
+                'Seconds', 'Transaction_type', 'Transaction_party',
+                'Transaction_amount', 'paid_in_or_Withdraw', 'Balance'
+            ]
 
-            if 'Transaction_party' in df.columns:
-                df_encoding = encode.transform(df[['Transaction_party']])
-                df_encoding = pd.DataFrame(df_encoding, columns=['Transaction_party'])
-            else:
-                df_encoding = pd.DataFrame({'Transaction_party': ['Unknown']})  # default placeholder
+            df = pd.DataFrame([dummy_features], columns=columns)
 
-            df_scaling = scaler.transform(df.drop(['Transaction_party'], axis=1, errors='ignore'))
-            df_encoded_scaling = pd.concat([df_encoding, pd.DataFrame(df_scaling)], axis=1)
+            # if 'Transaction_party' in df.columns:
+            #     df_encoding = encode.transform(df[['Transaction_party']])
+            #     df_encoding = pd.DataFrame(df_encoding, columns=['Transaction_party'])
+            # else:
+            #     df_encoding = pd.DataFrame({'Transaction_party': ['Unknown']})  # default placeholder
+            #
+            # df_scaling = scaler.transform(df.drop(['Transaction_party'], axis=1, errors='ignore'))
+            # df_encoded_scaling = pd.concat([df_encoding, pd.DataFrame(df_scaling)], axis=1)
+            # Encode categorical columns
+
+            for col in ['Transaction_type', 'Transaction_party', 'paid_in_or_Withdraw']:
+                if col in df.columns:
+                    df[col] = encode.transform(df[[col]])
+
+            # Scale entire dataframe
+            df_scaled = scaler.transform(df)
+
+            # Predict
+            predicted_spending = model.predict(df_scaled)
+            predicted_spending = int(predicted_spending[0])
 
             #  Make the prediction
             # prediction = model.predict(df)
             # prediction = int(prediction[0])
 
-            predicted_spending = model.predict(df_encoded_scaling)
+            predicted_spending = model.predict(df_scaled)
             predicted_spending = int(predicted_spending[0])
 
             # starting_balance = 5000
             # remaining_balance = starting_balance - predicted_spending
 
-            return {"remaining_balance": predicted_spending}, 200  # Returning JSON response
+            return {"Predicting_spending": predicted_spending}, 200  # Returning JSON response
 
         except Exception as e:
             print(f"Error: {e}")
