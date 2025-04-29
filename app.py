@@ -1,10 +1,7 @@
 from flask import Flask, request, render_template, jsonify
-from flask_restful import Resource, Api
 import pickle
 import pandas as pd
-import numpy as np
 from typing import Union
-from sklearn.preprocessing import LabelEncoder, StandardScaler
 from util import encode_categorical_columns, encode_categorical_columns_training_encoder
 
 model_path = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Mpesa_LinearRegression.pkl"
@@ -25,22 +22,13 @@ app = Flask(__name__)
 def Home():
     return render_template("index2.html")
 
-
 # CORS(app)
-
 # api = Api(app)
 
-
-@app.route('/predict', method=['POST'])
+@app.route('/predict', methods=['POST'])
 # class Prediction(Resource):
 def predict():
     try:
-
-        # data = request.get_json()
-        # transaction_amount = int(data['transactionAmount'])
-        # transaction_type = data['transactionType']
-        # transaction_party = data['transactionParty']
-        # paid_in_or_withdrawal = data['PaidInOrWithdrawal']
 
         data = request.form
 
