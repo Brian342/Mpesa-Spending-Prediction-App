@@ -17,3 +17,11 @@ def encode_categorical_columns(df: pd.DataFrame, encoding_type: str = 'label') -
         raise ValueError("Unsupported Label encoding_type. use label or onehot")
 
     return df_encoding
+
+def encode_categorical_columns_training_encoder(df, label_encoder):
+    encoded_columns = ['Transaction_type', 'Transaction_party', 'paid_in_or_Withdraw']
+    for column in encoded_columns:
+        if column in df.columns and column in label_encoder:
+            df[column] = label_encoder[column].transform(df[column])
+        else:
+            raise ValueError(f"Label encoder for column: {column} not found")

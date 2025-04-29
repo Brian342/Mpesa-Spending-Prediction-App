@@ -5,6 +5,8 @@ import pandas as pd
 import numpy as np
 from flask_cors import CORS
 from sklearn.preprocessing import LabelEncoder, StandardScaler
+from util import encode_categorical_columns, encode_categorical_columns_training_encoder
+
 
 model_path = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Mpesa_LinearRegression.pkl"
 scaling_type = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Scaler.pkl"
