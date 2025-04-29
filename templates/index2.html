@@ -9,68 +9,54 @@
 <body>
 
 <!--   Navbar -->
-    <nav class="navbar">
+<nav class="navbar">
         <div class="navbar-brand">Mpesa Statements Insights</div>
     </nav>
 
         <!-- Prediction -->
+<div class="container">
+        <h1>M-Pesa Spending Predictor</h1>
+        <div class="form-container">
+            <form id="prediction">
+                <input type="number" id="transactionAmount" placeholder="Transaction Amount" required>
+                <select id="transactionType">
+                    <option value="Buy Goods">Buy Goods </option>
+                    <option value="Pay Bill">Pay Bill </option>
+                    <option value="SEND MONEY">Send Money </option>
+                    <option value="M-SHWARI DEPOSIT FROM M-PESA">M-Shwari Deposit from M-Pesa</option>
+                    <option value="RECEIVED FUNDS">Received Funds</option>
+                    <option value="POCHI LA BIASHARA"> Pochi la Biashara </option>
+                    <option value="M-SHWARI WITHDRAW FROM M-PESA">M-Shwari Withdraw from M-Pesa</option>
+                    <option value="AIRTIME PURCHASE">Airtime Purchase </option>
+                    <option value="CASH WITHDRAWAL CHARGES"> Cash Withdrawal Charges </option>
+                    <option value="BUSINESS PAYMENT">Business Payment</option>
+                    <option value="AGENT DEPOSIT">Agent Deposit</option>
+                </select>
 
-<!--    <div class="container">-->
-<!--        <h1>M-Pesa Spending Predictor</h1>-->
+                <select id="transactionParty">
+                    <option value="FULIZA"> Fuliza</option>
+                    <option value="KPLC PREPAID">Kplc Prepaid</option>
+                    <option value="SAFARICOM DATA BUNDLES"> Safaricom Data Bundles</option>
+                    <option value="TRANSACTION COST">Transaction Cost</option>
+                    <option value="CO-OP BANK VIA API">Co-op Bank</option>
+                    <option value="KCB">KCB</option>
+                    <option value="CHIME INC">Chime Inc</option>
+                    <option value="NOVIA SOLUTIONS">Novia Solution</option>
+                    <option value="M-SHWARI">M-Shwari</option>
+                    <option value="TINGG">Tingg</option>
+                    <option value="SAFARICOM  HOME">Safaricom Home</option>
+                </select>
 
-<!--        <div class="form-container">-->
-<!--            <label for="transactionAmount">Enter Transaction Amount:</label>-->
-<!--            <input type="number" id="transactionAmount" placeholder="Enter amount">-->
-<!--            <button id="predictBtn">Predict Spending</button>-->
-<!--        </div>-->
+                <select id="PaidInOrWithdrawal">
+                    <option value="Pain_in"> Paid In </option>
+                    <option value="Withdrawal">Withdrawal</option>
+                </select>
+                <button type="submit"> Predict Spending</button>
+            </form>
+        </div>
+        <div id="result" class="result-container"></div>
+    </div>
 
-<!--        <div id="result" class="result-container">-->
-
-<!--        </div>-->
-
-<!--    </div>-->
-<form id="Prediction">
-    <input type="number" id="transactionAmount" placeholder="Transaction Amount" required>
-    <select id="transactionType">
-        <option value="Buy Goods">Buy Goods </option>
-        <option value="Pay Bill">Pay Bill </option>
-        <option value="SEND MONEY">Send Money </option>
-        <option value="M-SHWARI DEPOSIT FROM M-PESA">M-Shwari Deposit from M-Pesa</option>
-        <option value="RECEIVED FUNDS">Received Funds</option>
-        <option value="POCHI LA BIASHARA"> Pochi la Biashara </option>
-        <option value="M-SHWARI WITHDRAW FROM M-PESA">M-Shwari Withdraw from M-Pesa</option>
-        <option value="AIRTIME PURCHASE">Airtime Purchase </option>
-        <option value="CASH WITHDRAWAL CHARGES"> Cash Withdrawal Charges </option>
-        <option value="BUSINESS PAYMENT">Business Payment</option>
-        <option value="AGENT DEPOSIT">Agent Deposit</option>
-    </select>
-
-    <select id="transactionParty">
-        <option value="FULIZA"> Fuliza</option>
-        <option value="KPLC PREPAID">Kplc Prepaid</option>
-        <option value="SAFARICOM DATA BUNDLES"> Safaricom Data Bundles</option>
-        <option value="TRANSACTION COST">Transaction Cost</option>
-        <option value="CO-OP BANK VIA API">Co-op Bank</option>
-        <option value="KCB">KCB</option>
-        <option value="CHIME INC">Chime Inc</option>
-        <option value="NOVIA SOLUTIONS">Novia Solution</option>
-        <option value="M-SHWARI">M-Shwari</option>
-        <option value="TINGG">Tingg</option>
-        <option value="SAFARICOM  HOME">Safaricom Home</option>
-    </select>
-
-    <select id="PaidInOrWithdrawal">
-        <option value="Pain_in"> Paid In </option>
-        <option value="Withdrawal">Withdrawal</option>
-    </select>
-    <button type="submit"> Predict Spending</button>
-</form>
-
-
-
-
-
-</form>>
 
 <section class="charts-section">
 
