@@ -29,7 +29,7 @@ def Home():
 
 # CORS(app)
 
-api = Api(app)
+# api = Api(app)
 
 
 @app.route('/predict', method=['POST'])
@@ -55,6 +55,11 @@ def predict():
 
         # Encode input data
         encoded_input_df = encode_categorical_columns(input_df, encoding_type='label')
+
+        prediction = model.predict(encoded_input_df)
+        prediction = int(prediction[0])
+
+
 
         # features = {
         #     'transaction_day': 15,
