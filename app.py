@@ -7,7 +7,6 @@ from flask_cors import CORS
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from util import encode_categorical_columns, encode_categorical_columns_training_encoder
 
-
 model_path = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Mpesa_LinearRegression.pkl"
 scaling_type = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/Scaler.pkl"
 encoding_type = "/Users/briankimanzi/Documents/programming Languages/PythonProgramming/JupyterNoteBook/ModelsPrediction/df_encoding.pkl"
@@ -59,7 +58,10 @@ def predict():
         prediction = model.predict(encoded_input_df)
         prediction = int(prediction[0])
 
-
+        return {"Predicted_spending": prediction}, 200  # Returning JSON response
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"error": "An error occurred while processing the prediction."}, 500
 
         # features = {
         #     'transaction_day': 15,
@@ -77,7 +79,7 @@ def predict():
         #     'Balance': 1000
         # }
 
-        df = pd.DataFrame([features])
+        # df = pd.DataFrame([features])
 
         # if 'Transaction_party' in df.columns:
         #     df_encoding = encode.transform(df[['Transaction_party']])
@@ -89,29 +91,27 @@ def predict():
         # df_encoded_scaling = pd.concat([df_encoding, pd.DataFrame(df_scaling)], axis=1)
         # Encode categorical columns
 
-        for col in ['Transaction_type', 'Transaction_party', 'paid_in_or_Withdraw']:
-            if col in df.columns:
-                df[col] = encode.transform(df[[col]])
+        # for col in ['Transaction_type', 'Transaction_party', 'paid_in_or_Withdraw']:
+        #     if col in df.columns:
+        #         df[col] = encode.transform(df[[col]])
 
         # Scale entire dataframe
-        df_scaled = scaler.transform(df)
+        # df_scaled = scaler.transform(df)
 
         # Predict
-        predicted_spending = model.predict(df_scaled)
-        predicted_spending = int(predicted_spending[0])
+        # predicted_spending = model.predict(df_scaled)
+        # predicted_spending = int(predicted_spending[0])
 
         #  Make the prediction
         # prediction = model.predict(df)
         # prediction = int(prediction[0])
 
-        predicted_spending = model.predict(df_scaled)
-        predicted_spending = int(predicted_spending[0])
+        # predicted_spending = model.predict(df_scaled)
+        # predicted_spending = int(predicted_spending[0])
 
-        return {"Predicted_spending": predicted_spending}, 200  # Returning JSON response
+        # return {"Predicted_spending": predicted_spending}, 200  # Returning JSON response
 
-    except Exception as e:
-        print(f"Error: {e}")
-        return {"error": "An error occurred while processing the prediction."}, 500
+
 
 
 # Data API
