@@ -18,6 +18,7 @@ def encode_categorical_columns(df: pd.DataFrame, encoding_type: str = 'label') -
 
     return df_encoding
 
+
 def encode_categorical_columns_training_encoder(df, label_encoder):
     encoded_columns = ['Transaction_type', 'Transaction_party', 'paid_in_or_Withdraw']
     for column in encoded_columns:
