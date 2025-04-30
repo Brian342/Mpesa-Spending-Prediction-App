@@ -4,7 +4,7 @@ from sklearn.preprocessing import LabelEncoder
 
 def encode_categorical_columns(df: pd.DataFrame, encoding_type: str = 'label') -> pd.DataFrame:
     df_encoding = df.copy()
-    categorical_columns = df_encoding.select_dtypes(include='category').columns
+    categorical_columns = df_encoding.select_dtypes(include=['category', 'object']).columns
 
     if encoding_type == 'label':
         for col in categorical_columns:
