@@ -40,14 +40,6 @@ class Prediction(Resource):
             paid_in_or_withdrawal = data['PaidInOrWithdrawal']
 
             features = {
-                'transaction_Day': 15,
-                'Year': 2025,
-                'Month': 4,
-                'Date': 15,
-                'Weekday': 1,
-                'Hour': 14,
-                'Minute': 30,
-                'Seconds': 0,
                 'Transaction_type': transaction_type,
                 'Transaction_party': transaction_party,
                 'Transaction_amount': transaction_amount,
