@@ -57,7 +57,7 @@ class Prediction(Resource):
 
             input_df = pd.DataFrame([features])
 
-            encode_input_df = encode_categorical_columns_training_encoder(input_df, encode)
+            encode_input_df = encode_categorical_columns(input_df, encode)
 
             # Scale entire dataframe
             Scaled_input = scaler.transform(encode_input_df)
