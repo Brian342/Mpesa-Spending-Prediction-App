@@ -57,7 +57,7 @@ class Prediction(Resource):
 
             input_df = pd.DataFrame([features])
 
-            encode_input_df = encode_categorical_columns(input_df, encode)
+            encode_input_df = encode_categorical_columns_training_encoder(input_df, encode)
 
             # Scale entire dataframe
             Scaled_input = scaler.transform(encode_input_df)
@@ -65,7 +65,7 @@ class Prediction(Resource):
             predicted_spending = model.predict(Scaled_input)
             predicted_spending = int(predicted_spending[0])
 
-            return {"Predicted_spending": predicted_spending}, 200  # Returning JSON response
+            return {"Predictedspending": predicted_spending}, 200  # Returning JSON response
 
         except Exception as e:
             print(f"Error: {e}")
