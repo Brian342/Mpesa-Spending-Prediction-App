@@ -57,7 +57,7 @@ class Prediction(Resource):
             predicted_spending = model.predict(Scaled_input)
             predicted_spending = int(predicted_spending[0])
 
-            return {"Predictedspending": predicted_spending}, 200  # Returning JSON response
+            return {"PredictedSpending": predicted_spending}, 200  # Returning JSON response
 
         except Exception as e:
             print(f"Error: {e}")
