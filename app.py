@@ -6,7 +6,7 @@ from flask_cors import CORS
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from util import encode_categorical_columns, encode_categorical_columns_training_encoder
 
-model_path = "/Users/briankimanzi/Documents/python /M-pesa spending prediction app/Models/Mpesa_LinearRegression.pkl"
+model_path = "/Users/briankimanzi/Documents/python /M-pesa spending prediction app/Models/Mpesa_XGBRegressor.pkl"
 scaling_type = "/Users/briankimanzi/Documents/python /M-pesa spending prediction app/Models/Scaler.pkl"
 encoding_type = "/Users/briankimanzi/Documents/python /M-pesa spending prediction app/Models/df_encoding.pkl"
 
