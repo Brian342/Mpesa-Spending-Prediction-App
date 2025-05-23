@@ -31,6 +31,7 @@ def index():
 def predict():
     try:
         data = request.form
+        print("Incoming data:", data)
 
         # defining the features order based on the model
         feature_order = [
@@ -43,9 +44,11 @@ def predict():
         # creating data frame in the correct order
         input_df = pd.DataFrame([[data[field] for field in feature_order]], columns=feature_order)
         input_df['Transaction_amount'] = pd.to_numeric(input_df['Transaction_amount'], errors='raise')
+        print("Input DF:", input_df)
 
         # encode the input data
         encoded_input_df = encode_categorical_columns(input_df, encoding_type='label')
+        print("Encoded DF:", encoded_input_df)
 
         # predict the class using xgboost model
         prediction = model.predict(encoded_input_df)
