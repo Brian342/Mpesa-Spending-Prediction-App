@@ -3,6 +3,7 @@ import pickle
 import pandas as pd
 from typing import Union
 from util import encode_categorical_columns, encode_categorical_columns_training_encoder
+
 # from sklearn.preprocessing import LabelEncoder, StandardScaler
 # from flask_restful import Resource, Api
 # from flask_cors import CORS
@@ -20,9 +21,8 @@ except Exception as e:
 
 app = Flask(__name__)
 
+
 @app.route('/')
-
-
 def index():
     return render_template('index2.html')
 
@@ -39,7 +39,7 @@ def predict():
             'Transaction_amount',
             'paid_in_or_Withdraw',
 
-            ]
+        ]
         # creating data frame in the correct order
         input_df = pd.DataFrame([[data[field] for field in feature_order]], columns=feature_order)
         input_df['Transaction_amount'] = pd.to_numeric(input_df['Transaction_amount'], errors='raise')
