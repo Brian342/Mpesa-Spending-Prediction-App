@@ -17,7 +17,9 @@
 <div class="container">
         <h1>M-Pesa Spending Predictor</h1>
         <div class="form-container">
-            <form id="prediction">
+
+<!--            <form id="prediction">-->
+            <form action="/predict" method="POST">
                 <input type="number" id="transactionAmount" placeholder="Transaction Amount" required>
                 <select id="transactionType">
                     <option value="Buy Goods">Buy Goods </option>
