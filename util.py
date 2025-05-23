@@ -24,11 +24,14 @@ def encode_categorical_columns_training_encoder(df, label_encoder):
     for column in encoded_columns:
         if column in df.columns and column in label_encoder:
             le = label_encoder[column]
-            try:
-                df[column] = le.transform(df[column])
-            except ValueError as e:
-                print(f"[WARN] Unknown category found in '{column}': {e}")
-                df[column] = df[column].apply(lambda x: le.transform([x])[0] if x in le.classes_ else -1)
+            def safe_transform(val):
+                if val in le.classes_:
+                    return le.transform([val])[0]
+                else:
+                    print(f"[WARN] Unknown value '{val}' in column '{column}', assigning -1")
+                    return -1
+            df[column] = df[column].apply(safe_transform)
         else:
             raise ValueError(f"Label encoder for column: {column} not found")
     return df
+
