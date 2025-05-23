@@ -20,8 +20,9 @@
 
 <!--            <form id="prediction">-->
             <form action="/predict" method="POST">
+
                 <input type="number" id="transactionAmount" name="Transaction_amount" placeholder="Transaction Amount" required>
-                <select id="transactionType" name="Transaction_type">
+                <select name="Transaction_type">
                     <option value="Buy Goods">Buy Goods </option>
                     <option value="Pay Bill">Pay Bill </option>
                     <option value="SEND MONEY">Send Money </option>
@@ -35,7 +36,7 @@
                     <option value="AGENT DEPOSIT">Agent Deposit</option>
                 </select>
 
-                <select id="transactionParty" name="Transaction_party">
+                <select name="Transaction_party">
                     <option value="FULIZA"> Fuliza</option>
                     <option value="KPLC PREPAID">Kplc Prepaid</option>
                     <option value="SAFARICOM DATA BUNDLES"> Safaricom Data Bundles</option>
@@ -49,7 +50,7 @@
                     <option value="SAFARICOM  HOME">Safaricom Home</option>
                 </select>
 
-                <select id="PaidInOrWithdrawal" name="paid_in_or_Withdraw">
+                <select  name="paid_in_or_Withdraw">
                     <option value="Pain_in"> Paid In </option>
                     <option value="Withdrawal">Withdrawal</option>
                 </select>
