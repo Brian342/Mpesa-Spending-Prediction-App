@@ -38,6 +38,9 @@ def predict():
             'paid_in_or_Withdraw',
             'Balance']
         # creating data frame in the correct order
+        input_df = pd.DataFrame([[data[field] for field in feature_order]], columns=feature_order)
+
+        # encode the input data
 
 
 
