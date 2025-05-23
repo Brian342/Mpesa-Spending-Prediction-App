@@ -28,6 +28,16 @@ def index():
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
+        data = request.form
+
+        # defining the features order based on the model
+        feature_order = [
+            'Transaction_type',
+            'Transaction_party',
+            'Transaction_amount',
+            'paid_in_or_Withdraw',
+            'Balance']
+        # creating data frame in the correct order
 
 
 
