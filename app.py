@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, jsonify
-from flask_restful import Resource, Api
+# from flask_restful import Resource, Api
 import pickle
 import pandas as pd
 from flask_cors import CORS
@@ -21,7 +21,6 @@ except Exception as e:
 app = Flask(__name__)
 
 app.route('/')
-
 
 def index():
     return render_template('index2.html')
@@ -87,11 +86,6 @@ def predict_api() -> Union[str, jsonify]:
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
-
 
 
 
