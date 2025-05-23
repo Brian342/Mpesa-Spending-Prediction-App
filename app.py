@@ -38,11 +38,11 @@ def predict():
             'Transaction_party',
             'Transaction_amount',
             'paid_in_or_Withdraw',
-            'Balance']
+
+            ]
         # creating data frame in the correct order
         input_df = pd.DataFrame([[data[field] for field in feature_order]], columns=feature_order)
         input_df['Transaction_amount'] = pd.to_numeric(input_df['Transaction_amount'], errors='raise')
-        input_df['Balance'] = pd.to_numeric(input_df['Balance'], errors='raise')
 
         # encode the input data
         encoded_input_df = encode_categorical_columns(input_df, encoding_type='label')
@@ -75,7 +75,6 @@ def predict_api() -> Union[str, jsonify]:
         # create the DataFrame in the correct  order
         input_df = pd.DataFrame([[data[field] for field in feature_order]], columns=feature_order)
         input_df['Transaction_amount'] = pd.to_numeric(input_df['Transaction_amount'], errors='raise')
-        input_df['Balance'] = pd.to_numeric(input_df['Balance'], errors='raise')
 
         # Encoding the feature data
         encode_input_df = encode_categorical_columns(input_df, encoding_type='label')
