@@ -41,6 +41,11 @@ def predict():
         input_df = pd.DataFrame([[data[field] for field in feature_order]], columns=feature_order)
 
         # encode the input data
+        encoded_input_df = encode_categorical_columns(input_df, encoding_type='label')
+
+        # predict the class using xgboost model
+        prediction = model.predict(encoded_input_df)
+        return render_template('')
 
 
 
