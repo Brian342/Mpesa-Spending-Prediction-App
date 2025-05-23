@@ -3,6 +3,7 @@ from flask_restful import Resource, Api
 import pickle
 import pandas as pd
 from flask_cors import CORS
+from typing import Union
 # from sklearn.preprocessing import LabelEncoder, StandardScaler
 from util import encode_categorical_columns, encode_categorical_columns_training_encoder
 
@@ -25,6 +26,7 @@ app.route('/')
 def index():
     return render_template('index2.html')
 
+
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -45,7 +47,33 @@ def predict():
 
         # predict the class using xgboost model
         prediction = model.predict(encoded_input_df)
-        return render_template('')
+        result = int(prediction[0])
+        return {'prediction_spending': result}, 200
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"error": "An error occurred while processing the prediction."}, 500
+
+@app.route('/predict_api', methods=['POST'])
+def predict_api() -> Union[str, jsonify]:
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
