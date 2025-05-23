@@ -4,7 +4,7 @@ from sklearn.preprocessing import LabelEncoder
 
 def encode_categorical_columns(df: pd.DataFrame, encoding_type: str = 'label') -> pd.DataFrame:
     df_encoding = df.copy()
-    categorical_columns = df_encoding.select_dtypes(include=['object','category']).columns
+    categorical_columns = df_encoding.select_dtypes(include=['object', 'category']).columns
 
     if encoding_type == 'label':
         for col in categorical_columns:
@@ -23,6 +23,12 @@ def encode_categorical_columns_training_encoder(df, label_encoder):
     encoded_columns = ['Transaction_type', 'Transaction_party', 'paid_in_or_Withdraw']
     for column in encoded_columns:
         if column in df.columns and column in label_encoder:
-            df[column] = label_encoder[column].transform(df[column])
+            le = label_encoder[column]
+            try:
+                df[column] = le.transform(df[column])
+            except ValueError as e:
+                print(f"[WARN] Unknown category found in '{column}': {e}")
+                df[column] = df[column].apply(lambda x: le.transform([x])[0] if x in le.classes_ else -1)
         else:
             raise ValueError(f"Label encoder for column: {column} not found")
+    return df
