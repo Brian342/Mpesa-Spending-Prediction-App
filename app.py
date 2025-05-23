@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from flask_restful import Resource, Api
 import pickle
 import pandas as pd
@@ -54,26 +54,39 @@ def predict():
         print(f"Error: {e}")
         return {"error": "An error occurred while processing the prediction."}, 500
 
+
 @app.route('/predict_api', methods=['POST'])
 def predict_api() -> Union[str, jsonify]:
+    try:
+        # extract the json file from the data
+        data = request.get_json()
 
+        # Define the correct feature order
+        feature_order = [
+            'Transaction_type',
+            'Transaction_party',
+            'Transaction_amount',
+            'paid_in_or_Withdraw',
+            'Balance'
+        ]
+
+        # create the DataFrame in the correct  order
+        input_df = pd.DataFrame([[data[field] for field in feature_order]], columns=feature_order)
+
+        # Encoding the feature data
+        encode_input_df = encode_categorical_columns(input_df, encoding_type='label')
+
+        # predicting the class using model
+        prediction = model.predict(encode_input_df)
+
+        return jsonify({'result': prediction.tolist()})
+
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
