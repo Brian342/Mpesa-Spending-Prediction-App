@@ -49,7 +49,6 @@ def predict():
         # encode the input data
         # encoded_input_df = encode_categorical_columns(input_df, encoding_type='label')
         encoded_input_df = encode_categorical_columns_training_encoder(input_df, encode)
-
         print("Encoded DF:", encoded_input_df)
 
         # predict the class using xgboost model
