@@ -69,7 +69,6 @@ def predict_api() -> Union[str, jsonify]:
             'Transaction_party',
             'Transaction_amount',
             'paid_in_or_Withdraw',
-            'Balance'
         ]
 
         # create the DataFrame in the correct  order
