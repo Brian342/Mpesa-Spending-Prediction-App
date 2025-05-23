@@ -47,7 +47,9 @@ def predict():
         print("Input DF:", input_df)
 
         # encode the input data
-        encoded_input_df = encode_categorical_columns(input_df, encoding_type='label')
+        # encoded_input_df = encode_categorical_columns(input_df, encoding_type='label')
+        encoded_input_df = encode_categorical_columns_training_encoder(input_df, encode)
+
         print("Encoded DF:", encoded_input_df)
 
         # predict the class using xgboost model
@@ -79,10 +81,12 @@ def predict_api() -> Union[str, jsonify]:
         input_df['Transaction_amount'] = pd.to_numeric(input_df['Transaction_amount'], errors='raise')
 
         # Encoding the feature data
-        encode_input_df = encode_categorical_columns(input_df, encoding_type='label')
+        # encode_input_df = encode_categorical_columns(input_df, encoding_type='label')
+
+        encoded_input_df = encode_categorical_columns_training_encoder(input_df, encode)
 
         # predicting the class using model
-        prediction = model.predict(encode_input_df)
+        prediction = model.predict(encoded_input_df)
 
         return jsonify({'result': prediction.tolist()})
 
